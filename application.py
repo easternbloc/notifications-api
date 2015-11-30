@@ -1,11 +1,23 @@
-from flask import Flask
+import os
 
-app = Flask(__name__)
+from flask.ext.script import Manager, Server
+from flask_migrate import Migrate, MigrateCommand
+from app import create_app, db
+
+application = create_app(os.getenv('NOTIFICATIONS_API_ENVIRONMENT') or 'development')
+manager = Manager(application)
+port = int(os.environ.get('PORT', 6011))
+manager.add_command("runserver", Server(host='0.0.0.0', port=port))
+migrate = Migrate(application, db)
+manager.add_command('db', MigrateCommand)
 
 
-@app.route('/')
-def index():
-    return 'Hello from notify-notifications-api'
+@manager.command
+def list_routes():
+    """List URLs of all application routes."""
+    for rule in sorted(application.url_map.iter_rules(), key=lambda r: r.rule):
+        print("{:10} {}".format(", ".join(rule.methods - set(['OPTIONS', 'HEAD'])), rule.rule))
+
 
 if __name__ == '__main__':
-    app.run(port=6011)
+    manager.run()
