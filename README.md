@@ -37,7 +37,8 @@ User api_key created uniquely when new user account added into the system.
 
 ## JWT Token structure
 
-```headers = {
+```
+headers = {
     "type": "JWT",
     "alg": "HS256"
 }
