@@ -1,18 +1,16 @@
 class Config(object):
     DEBUG = False
-
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = False
-    SQLALCHEMY_RECORD_QUERIES = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/notify'
+    AUTH_REQUIRED = True
 
 
 class Development(Config):
     DEBUG = True
+    AUTH_REQUIRED = True
 
 
 class Test(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/test_notifications_api'
+    AUTH_REQUIRED = True
 
 
 configs = {

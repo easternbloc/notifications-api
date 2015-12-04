@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, Blueprint
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask._compat import string_types
 
@@ -18,7 +18,7 @@ def create_app(config_name):
     db.init_app(application)
     init_app(application)
 
-    from app.main import main as main_blueprint
+    from .main import main as main_blueprint
     application.register_blueprint(main_blueprint)
 
     return application

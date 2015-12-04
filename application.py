@@ -1,15 +1,17 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
 import os
 
 from flask.ext.script import Manager, Server
-from flask_migrate import Migrate, MigrateCommand
+
 from app import create_app, db
 
 application = create_app(os.getenv('NOTIFICATIONS_API_ENVIRONMENT') or 'development')
 manager = Manager(application)
 port = int(os.environ.get('PORT', 6011))
 manager.add_command("runserver", Server(host='0.0.0.0', port=port))
-migrate = Migrate(application, db)
-manager.add_command('db', MigrateCommand)
 
 
 @manager.command

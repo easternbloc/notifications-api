@@ -1,16 +1,51 @@
-class DaoApi(object):
-    def retrieve_all_service(self):
-        self.retrieve_all_service()
-        print("Not implemented")
+from app.models import Service
 
-    def create_service(self, service):
-        self.create_service()
-        print("Not implemented")
 
-    def retrieve_service(self, s_id):
-        self.retrieve_service()
-        print("Not implemented")
+def add_service(service):
+    print("New service added")
 
-    def retrieve_services_for_user(self, user_id):
-        self.retrieve_services_for_user()
-        print("Not implemented")
+
+def retrieve_all_services():
+    services = list()
+
+    services.append(Service(id=1,
+                            user_id=1,
+                            name="Service1",
+                            created_at="01/01/2015",
+                            active=True,
+                            limit=100,
+                            restricted=True))
+
+    services.append(Service(id=2,
+                            user_id=2,
+                            name="Service2",
+                            created_at="01/01/2015",
+                            active=True,
+                            limit=100,
+                            restricted=True))
+
+    services.append(Service(id=3,
+                            user_id=3,
+                            name="Service3",
+                            created_at="01/01/2015",
+                            active=True,
+                            limit=100,
+                            restricted=True))
+
+    services.append(Service(id=4,
+                            user_id=4,
+                            name="Service4",
+                            created_at="01/01/2015",
+                            active=True,
+                            limit=100,
+                            restricted=True))
+
+    services.append(Service(id=5,
+                            user_id=5,
+                            name="Service5",
+                            created_at="01/01/2015",
+                            active=True,
+                            limit=100,
+                            restricted=True))
+
+    return services
