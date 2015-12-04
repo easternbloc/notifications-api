@@ -99,12 +99,6 @@ class TestCase(unittest.TestCase):
         msg = msg.decode()
         print(">>>POST body: ", msg)
 
-        # hash_alg = hashlib.sha256
-        # key = API_KEY.encode('utf-8')
-        # digest = hmac.new(key, payload, hash_alg).digest()
-        # signature = base64url_encode(digest)
-        # print(">>> Signature: ", signature)
-
         resp = tester.post('/service', content_type='application/json', headers=headers, data=msg)
 
         self.assertEqual(resp.status_code, 200)

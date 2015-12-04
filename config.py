@@ -1,5 +1,5 @@
 class Config(object):
-    DEBUG = False
+    DEBUG = True
     AUTH_REQUIRED = True
 
 
@@ -9,7 +9,7 @@ class Development(Config):
 
 
 class Test(Config):
-    DEBUG = False
+    DEBUG = True
     AUTH_REQUIRED = True
 
 

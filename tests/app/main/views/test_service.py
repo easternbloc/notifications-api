@@ -13,8 +13,9 @@ def test_get_services_view(notify_api):
     #                    limit=100,
     #                    restricted=True)
 
+    req_url = "/services"
     resp = notify_api.test_client().get(
-        '/services',
+        req_url,
         headers={'Authorization': 'NOTIFY USER1234'})
 
     data = json.loads(resp.get_data())

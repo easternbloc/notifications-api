@@ -1,6 +1,5 @@
 import pytest
 import mock
-import os
 from config import configs
 from app import create_app
 

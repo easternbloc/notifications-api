@@ -21,11 +21,9 @@ def get_token_from_headers(headers):
     try:
         auth_header = headers.get('Authorization', '')
         token = auth_header.split(":")
-
         api_user_id = token[0]
         jwt_token = token[1]
         user = user_dao.retrieve_user(api_user_id)
-
         claims = decode_token(user.api_key, jwt_token)
     except Exception as e:
         print(e)
@@ -56,12 +54,14 @@ def valid_claims(claims, user):
         print(">>>Incorrect issuer")
         return False
 
+    # check if JWT token was generated within last 24hrs.
     if datetime.datetime.fromtimestamp(int(claim_data['iat'])) + datetime.timedelta(
             days=1) < datetime.datetime.utcnow():
         print(datetime.datetime.fromtimestamp(int(claim_data['iat'])))
         print(">>>Token expired")
         return False
 
+    # current request url and request url in header hashes should match
     request_url = request.url_rule
     if claim_data['qsh'] != hashlib.sha256(str(request_url).encode()).hexdigest():
         print(">>>Request doesn't match")

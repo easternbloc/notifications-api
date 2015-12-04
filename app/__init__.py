@@ -18,8 +18,8 @@ def create_app(config_name):
     db.init_app(application)
     init_app(application)
 
-    from .main import main as main_blueprint
-    application.register_blueprint(main_blueprint)
+    # from .main import main as main_blueprint
+    # application.register_blueprint(main_blueprint)
 
     return application
 
