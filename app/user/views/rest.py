@@ -30,7 +30,7 @@ def update_user(user_id):
     except NoResultFound:
         return jsonify(result="error", message="User not found"), 404
     if request.method == 'DELETE':
-        status_code = 202
+        status_code = 200
         delete_model_user(user)
     else:
         status_code = 200

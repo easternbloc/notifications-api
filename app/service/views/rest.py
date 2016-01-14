@@ -44,7 +44,7 @@ def update_service(service_id):
     except NoResultFound:
         return jsonify(result="error", message="Service not found"), 404
     if request.method == 'DELETE':
-        status_code = 202
+        status_code = 200
         delete_model_service(service)
     else:
         status_code = 200
@@ -112,7 +112,7 @@ def revoke_token(service_id):
     service_token = get_model_tokens(service_id=service_id, raise_=False)
     if service_token:
         save_model_token(service_token, update_dict={'id': service_token.id, 'expiry_date': datetime.now()})
-    return jsonify(), 202
+    return jsonify(), 204
 
 
 # TODO auth to be added.
@@ -150,7 +150,7 @@ def update_template(service_id, template_id):
     except NoResultFound:
         return jsonify(result="error", message="Template not found"), 404
     if request.method == 'DELETE':
-        status_code = 202
+        status_code = 200
         delete_model_template(template)
     else:
         status_code = 200
