@@ -229,7 +229,7 @@ def test_delete_user(notify_api, notify_db, notify_db_session, sample_user):
             resp = client.delete(
                 url_for('user.update_user', user_id=user.id),
                 headers=[('Content-Type', 'application/json')])
-            assert resp.status_code == 202
+            assert resp.status_code == 200
             json_resp = json.loads(resp.get_data(as_text=True))
             assert User.query.count() == 0
 

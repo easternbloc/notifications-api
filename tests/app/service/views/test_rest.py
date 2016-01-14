@@ -247,7 +247,7 @@ def test_delete_service(notify_api, notify_db, notify_db_session, sample_service
             resp = client.delete(
                 url_for('service.update_service', service_id=service.id),
                 headers=[('Content-Type', 'application/json')])
-            assert resp.status_code == 202
+            assert resp.status_code == 200
             json_resp = json.loads(resp.get_data(as_text=True))
             json_resp['data']['name'] == sample_service.name
             assert Service.query.count() == 0
@@ -315,7 +315,7 @@ def test_revoke_token_should_expire_token_for_service(notify_api, notify_db, not
         with notify_api.test_client() as client:
             assert len(Token.query.all()) == 1
             response = client.post(url_for('service.revoke_token', service_id=sample_token.service_id))
-            assert response.status_code == 202
+            assert response.status_code == 204
             all_tokens = Token.query.all()
             assert len(all_tokens) == 1
             assert all_tokens[0].expiry_date is not None
